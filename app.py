@@ -9,7 +9,9 @@ DATA_PATH = 'data/'
 TRAIN_PATH= os.path.join(DATA_PATH, 'train.csv')
 TEST_PATH = os.path.join(DATA_PATH, 'test.csv')
 
-
+'''
+    Change column names of the datasets in order to have shorter names
+'''
 def change_column_names(df, df_test):
     old_cols  = list(df.columns)
     feat_cols = ['f'+str(x) for x in range(len(old_cols) - 1)]
@@ -21,6 +23,9 @@ def change_column_names(df, df_test):
 
     return df, df_test, feat_cols, target
 
+'''
+    Load datasets for training and prediction
+'''
 def load_data():
     df      = pd.read_csv(TRAIN_PATH, sep=';')
     df_test = pd.read_csv(TEST_PATH, sep=';')
@@ -28,6 +33,9 @@ def load_data():
     print(df_test.shape, "raw shape df test")
     return df, df_test
 
+'''
+    Trains and returns a model
+'''
 def train_model(df, feat_cols, target):
     from sklearn.model_selection import GridSearchCV
     from sklearn.ensemble import RandomForestClassifier
